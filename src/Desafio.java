@@ -5,45 +5,50 @@ import java.util.Map;
 
 public class Desafio {
 
-	  public static void main(String[] args) {
-		  
-		  List<Item> itens = new ArrayList<>();
-		
-		  
-		itens.add(new Item("Picanha", 1, 4));
-		  itens.add(new Item("Linguiça", 1, 3 ));
-		  
-		    List<String> emails = new ArrayList<>();
-		    
-		    emails.add("barbara@gmail.com");
-		    emails.add("diego_jr@homail.com");
-		    emails.add("djanir_ribeiro@uol.com");
-		    
-		    
-		    Map<String, Integer> resultado = Desafio.calcula(itens, emails);
-		    System.out.println( resultado); // printa o resultado
-		  }
+	public static void main(String[] args) {
 
-	private static Map<String, Integer> calcula(List<Item> itens, List<String> emails) {
-		int qtdParticipantes = emails.size();
+		List<Item> itens = new ArrayList<Item>();
+		List<String> emails = new ArrayList<String>();
+
+		itens.add(new Item("Picanha", 1, 100));
+
+		System.out.println(itens.size());
+
+		emails.add("barbara@gmail.com");
+		emails.add("diego_jr@homail.com");
+		emails.add("djanir_ribeiro@uol.com");
+
+		System.out.println(emails.size());
+
+		Map<String, Integer> resultado = Desafio.calcula(emails, itens);
+		System.out.println("Valor dividido : " + " " + resultado); // printa o resultado
+	}
+
+	private static Map<String, Integer> calcula(List<String> emails, List<Item> itens) {
+
 		int somaValores = 0;
-		
-				
-		for(int indice = 0; indice < emails.size() -1 ; indice++) {
-			
+
+		for (int indice = 0; indice < itens.size(); indice++) {
 			somaValores += (itens.get(indice).getQuantidade() * itens.get(indice).getPreco());
-			
+
 		}
-		
-		int divSemSobra = somaValores / qtdParticipantes;
-		int divSObra = somaValores % qtdParticipantes;
-		
+
+		int divSobra = somaValores / emails.size();
+
+		int divSemsobra = divSobra * emails.size();
+		int totalSobra = somaValores - divSemsobra;
+
 		Map<String, Integer> valoresPagConta = new HashMap<String, Integer>();
-		for(String email : emails ) {
-			valoresPagConta.put(email, divSemSobra);
+
+		int novoValor;
+		for (String email : emails) {
+
+			valoresPagConta.put(email, divSobra);
+			novoValor = valoresPagConta.compute("barbara@gmail.com", (key, value) -> divSobra + totalSobra);
+
 		}
-			
+
 		return valoresPagConta;
 	}
-	
-		}
+
+}
