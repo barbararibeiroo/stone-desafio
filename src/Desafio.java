@@ -12,13 +12,13 @@ public class Desafio {
 
 		itens.add(new Item("Picanha", 1, 100));
 
-		System.out.println(itens.size());
+		
 
 		emails.add("barbara@gmail.com");
 		emails.add("diego_jr@homail.com");
 		emails.add("djanir_ribeiro@uol.com");
 
-		System.out.println(emails.size());
+	
 
 		Map<String, Integer> resultado = Desafio.calcula(emails, itens);
 		System.out.println("Valor dividido : " + " " + resultado); // printa o resultado
